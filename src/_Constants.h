@@ -27,7 +27,9 @@ const int BUTTON2_PIN = 2;
 
 #define VERSION_NUMBER "0.2"
 
-#define ROTARY_ENCODER_ADDRESS 0x36
+// My board has the battery charger at address 0x37
+// This requires jumping the A0 on the rotary encoder board.
+#define ROTARY_ENCODER_ADDRESS 0x37
 #define ENCODER_SWITCH_PIN 24
 #define ENCODER_NEOPIXEL_PIN 6
 
