@@ -27,7 +27,7 @@ BaseView &activeView = statusView;
 
 void handleInput(UserInput input)
 {
-  Serial.print(F("forwarded input"));
+  Serial.println(F("forwarded input"));
   activeView.handleInputEvent(input);
 }
 
@@ -57,7 +57,7 @@ void updateEnvironmentData(float temp, float humidity, float lux)
 void setup(void)
 {
   Serial.begin(9600);
-  Serial.print(F("Hello! Feather TFT Test"));
+  Serial.println(F("Hello! Feather TFT Test"));
 
   sensor.setCallback(updateEnvironmentData);
   input.setCallback(handleInput);

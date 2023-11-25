@@ -92,7 +92,7 @@ void StatusView::handleInputEvent(UserInput input)
 
   if (viewHierarchy.size() > 0)
   {
-    Serial.print("redirecting input");
+    Serial.println("redirecting input");
     viewHierarchy.front()->handleInputEvent(input);
 
     return;

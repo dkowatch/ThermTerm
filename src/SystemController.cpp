@@ -141,7 +141,7 @@ void SystemController::handleRemotePowerChange(bool powerState, HAHVAC *sender)
 
 void SystemController::handleRemoteFanModeChange(HAHVAC::FanMode fanMode, HAHVAC *sender)
 {
-    Serial.print("updating fan mode" + String(fanMode));
+    Serial.println("updating fan mode" + String(fanMode));
     state_.fanSpeed = convertFanMode(fanMode);
     state_.power = ON;
     sender->setFanMode(fanMode);
@@ -151,7 +151,7 @@ void SystemController::handleRemoteFanModeChange(HAHVAC::FanMode fanMode, HAHVAC
 
 void SystemController::handleRemoteTargetTemperatureChange(HANumeric temperature, HAHVAC *sender)
 {
-    Serial.print("receiving remote temperature change");
+    Serial.println("receiving remote temperature change");
     setSetPoint(temperature.toFloat());
 }
 
@@ -178,7 +178,7 @@ void SystemController::setTemperature(float temperature)
     {
         state_.temperature = temperature;
         haInterface_.getTemperatureSensor().setValue(temperature);
-        Serial.print(F("logging temp update"));
+        Serial.println(F("logging temp update"));
     }
 }
 
@@ -188,7 +188,7 @@ void SystemController::setHumidity(float humidity)
     {
         state_.humidity = humidity;
         haInterface_.getHumiditySensor().setValue(humidity);
-        Serial.print(F("logging humidity update"));
+        Serial.println(F("logging humidity update"));
     }
 }
 
@@ -198,7 +198,7 @@ void SystemController::setLux(float lux)
     {
         state_.lux = lux;
         haInterface_.getLightSensor().setValue(lux);
-        Serial.print(F("Logging light update"));
+        Serial.println(F("Logging light update"));
     }
 }
 
@@ -305,6 +305,6 @@ void SystemController::staticHandleRemoteModeChange(HAHVAC::Mode mode, HAHVAC *s
 
 void SystemController::staticHandleAlert(bool status, HASwitch *sender)
 {
-    Serial.print("switch changed");
+    Serial.println("switch changed");
     sender->setState(status);
 }

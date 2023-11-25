@@ -3,26 +3,26 @@
 
 void RotaryEncoder::configure()
 {
-    Serial.print("Looking for seesaw!");
+    Serial.println("Looking for seesaw!");
 
     if (!seesawInterface_.begin(ROTARY_ENCODER_ADDRESS) || !neoPixel_.begin(ROTARY_ENCODER_ADDRESS))
     {
-        Serial.print("Couldn't find seesaw on default address");
+        Serial.println("Couldn't find seesaw on default address");
     }
     else
     {
-        Serial.print("seesaw started");
+        Serial.println("seesaw started");
     }
 
     uint32_t version = ((seesawInterface_.getVersion() >> 16) & 0xFFFF);
     if (version != 4991)
     {
         Serial.print("Wrong firmware loaded? ");
-        Serial.print(version);
+        Serial.println(version);
     }
     else
     {
-        Serial.print("Found Product 4991");
+        Serial.println("Found Product 4991");
     }
 
     // get starting position

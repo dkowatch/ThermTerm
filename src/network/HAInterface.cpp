@@ -55,15 +55,15 @@ void HAInterface::configure(bool useCelsius)
         hvacDevice_.setTemperatureUnit(HAHVAC::TemperatureUnit::FahrenheitUnit);
     }
 
-    Serial.print("Connecting to MQTT\n");
+    Serial.println("Connecting to MQTT\n");
 
     if (mqtt_.begin(MQTT_BROKER, MQTT_LOGIN, MQTT_PASSWORD) == true)
     {
-        Serial.print("Connected to MQTT broker");
+        Serial.println("Connected to MQTT broker");
     }
     else
     {
-        Serial.print("Could not connect to MQTT broker");
+        Serial.println("Could not connect to MQTT broker");
     }
 }
 
