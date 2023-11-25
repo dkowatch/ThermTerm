@@ -38,6 +38,8 @@ void EnvSensor::configure()
         Serial.println("Found SHTC3 sensor");
     }
 
+    // See https://github.com/Starmbi/hp_BH1750
+    // TODO: calibrate the sensor
     bool avail = BH1750.begin(BH1750_TO_GROUND); // init the sensor with address pin connetcted to ground
                                                  // result (bool) wil be be "false" if no sensor found
     if (!avail)
@@ -64,6 +66,18 @@ EnvData EnvSensor::update()
 
     BH1750.start(); // starts a measurement
     float lux = BH1750.getLux();
+
+#if DEBUG_SENSORS
+    Serial.print(F("Humidity Update: "));
+    Serial.println(humidity.relative_humidity);
+    Serial.print(F("Temp Update: "));
+    Serial.print(temp.temperature);
+    Serial.print(F("C; "));
+    Serial.print(fConversion);
+    Serial.print(F("F\n"));
+    Serial.print(F("Lux: "));
+    Serial.println(lux);
+#endif
 
     return {round(fConversion), round(humidity.relative_humidity), lux};
 }

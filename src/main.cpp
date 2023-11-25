@@ -27,7 +27,12 @@ BaseView &activeView = statusView;
 
 void handleInput(UserInput input)
 {
-  Serial.println(F("forwarded input"));
+#if DEBUG_INPUT
+  Serial.print(F("forwarded input: "));
+  Serial.println(input.source_name());
+#else
+  Serial.print(F("forwarded input"));
+#endif
   activeView.handleInputEvent(input);
 }
 

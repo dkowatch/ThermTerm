@@ -44,6 +44,24 @@ struct UserInput
         }
     }
     UserInput(InputSource source, InputEvent event) : source(source), event(event) {}
+
+    const char *source_name()
+    {
+#define PROCESS_SOURCE(p) \
+    case p:               \
+        return #p
+
+        switch (source)
+        {
+            PROCESS_SOURCE(RotaryUp);
+            PROCESS_SOURCE(RotaryDown);
+            PROCESS_SOURCE(RotaryButton);
+            PROCESS_SOURCE(Button0);
+            PROCESS_SOURCE(Button1);
+            PROCESS_SOURCE(Button2);
+        }
+    }
+#undef PROCESS_SOURCE
 };
 
 typedef void (*InputHandlingCallback)(UserInput event);
@@ -55,7 +73,7 @@ class Input : public Singleton<Input>
 public:
     void configure();
     void heartbeat();
-    void setCallback(InputHandlingCallback callback) { inputHandlingCallback = callback;};
+    void setCallback(InputHandlingCallback callback) { inputHandlingCallback = callback; };
     void processInput(UserInput input);
     void rotaryEncoderHandler(RotaryEncoder::Event);
     seesaw_NeoPixel *getNeoPixel() { return rotaryEncoder_.getNeopixel(); };
